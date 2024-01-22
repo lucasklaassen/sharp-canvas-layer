@@ -52,12 +52,6 @@ jobs:
       - name: Update PREV_VERSION
         if: ${{ env.sharpver != steps.version.outputs.prop && github.event_name != 'pull_request' }}
         run: echo ${{steps.version.outputs.prop}} > PREV_VERSION
-      - name: Create commit
-        uses: stefanzweifel/git-auto-commit-action@v4
-        if: ${{ env.sharpver != steps.version.outputs.prop && github.event_name != 'pull_request' }}
-        with:
-          commit_message: ${{steps.version.outputs.prop}}
-          file_pattern: PREV_VERSION
       - name: Create release
         uses: softprops/action-gh-release@v1
         if: ${{ env.sharpver != steps.version.outputs.prop && github.event_name != 'pull_request' }}
